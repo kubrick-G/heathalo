@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111722" />
+  <meta name="description" content="HeatHalo turns neighborhood heat signals into clear, community-led cooling actions." />
+  <title>HeatHalo — Neighborhood heat intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="HeatHalo home">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <span class="brand-name">Heat<span>Halo</span></span>
+      </a>
+      <div class="topbar-meta">
+        <span class="live-dot"></span><span>community signal / 08:42 local</span>
+        <button class="quiet-button" id="shareButton" type="button"><span aria-hidden="true">↗</span> Share snapshot</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="intro section-wrap">
+        <div class="eyebrow"><span class="eyebrow-line"></span> A neighborhood heat resilience tool</div>
+        <div class="intro-grid">
+          <div>
+            <h1>Heat is not<br /><em>evenly distributed.</em></h1>
+            <p class="lede">HeatHalo helps a community see where heat will hurt most, then move cooling resources there first.</p>
+            <div class="intro-actions">
+              <a class="primary-button" href="#dashboard">Open the neighborhood view <span>↓</span></a>
+              <a class="text-link" href="#how-it-works">How the signal works <span>→</span></a>
+            </div>
+          </div>
+          <aside class="intro-note">
+            <span class="note-pin">FIELD NOTE 01</span>
+            <p>On the same street, one block can be 9°F hotter because it has less canopy, more asphalt, and more people at risk.</p>
+            <div class="note-rule"></div>
+            <span class="mono tiny">DESIGNED FOR RESIDENTS + ORGANIZERS</span>
+          </aside>
+        </div>
+      </section>
+
+      <section class="dashboard section-wrap" id="dashboard">
+        <div class="dashboard-heading">
+          <div>
+            <div class="section-kicker">01 / SEE THE SIGNAL</div>
+            <h2>Today in <span class="underline-accent">Eastwood</span></h2>
+          </div>
+          <label class="scenario-picker">SCENARIO
+            <select id="scenarioSelect" aria-label="Choose a heat scenario">
+              <option value="today">Today · Aug 14, 2026</option>
+              <option value="tomorrow">Tomorrow · Aug 15, 2026</option>
+              <option value="weekend">Weekend · Aug 16, 2026</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="signal-grid">
+          <article class="risk-card">
+            <div class="card-topline"><span class="mono tiny">EASTWOOD / ALL BLOCKS</span><span class="status-chip">● MONITOR</span></div>
+            <div class="risk-core">
+              <div class="halo-ring"><div><strong id="riskValue">72</strong><span>/100</span></div></div>
+              <div class="risk-copy"><span class="mono tiny">COMMUNITY HEAT RISK</span><h3 id="riskLabel">High</h3><p id="riskSummary">Start with the blocks where exposure and vulnerability overlap.</p></div>
+            </div>
+            <div class="risk-factors" id="riskFactors">
+              <div><span>Air temperature</span><strong>96°F</strong><i class="bar"><b style="width:84%"></b></i></div>
+              <div><span>Heat index</span><strong>104°F</strong><i class="bar"><b style="width:91%"></b></i></div>
+              <div><span>Tree canopy</span><strong>18%</strong><i class="bar cool"><b style="width:32%"></b></i></div>
+            </div>
+            <p class="data-note"><span class="info-dot">i</span> Demo signal combines weather, canopy, surface, and vulnerability indicators. It is a planning aid—not medical advice.</p>
+          </article>
+
+          <article class="map-card">
+            <div class="card-topline"><span class="mono tiny">EXPOSURE × VULNERABILITY</span><div class="map-legend"><span class="legend-dot critical"></span> urgent <span class="legend-dot watch"></span> watch <span class="legend-dot cool-dot"></span> cooler</div></div>
+            <div class="map-wrap" aria-label="Illustrated map of Eastwood blocks">
+              <div class="map-label map-label-a">MARTIN AVE</div><div class="map-label map-label-b">7TH ST</div><div class="map-label map-label-c">WILLOW PARK</div>
+              <div class="road road-one"></div><div class="road road-two"></div><div class="road road-three"></div><div class="road road-four"></div>
+              <button class="block block-a critical-block selected" data-block="a" aria-label="Juniper Court, highest priority"><span>JUNIPER CT</span><b>01</b></button>
+              <button class="block block-b watch-block" data-block="b" aria-label="Martin Avenue, watch"><span>MARTIN AVE</span><b>02</b></button>
+              <button class="block block-c critical-block" data-block="c" aria-label="7th and Pine, urgent"><span>7TH + PINE</span><b>03</b></button>
+              <button class="block block-d cool-block" data-block="d" aria-label="Willow Park, cooler"><span>WILLOW PARK</span><b>04</b></button>
+              <span class="map-compass">N<br><span>↑</span></span>
+            </div>
+            <div class="selected-block"><div><span class="mono tiny">TOP PRIORITY BLOCK</span><h3 id="blockName">Juniper Court</h3></div><div class="selected-score"><strong id="blockScore">91</strong><span>risk</span></div></div>
+            <p class="block-detail" id="blockDetail">Low canopy, high renter density, and 3 cooling stops more than a 10-minute walk away.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="action-section section-wrap" id="actions">
+        <div class="section-heading-row"><div><div class="section-kicker">02 / TURN SIGNAL INTO ACTION</div><h2>Start with the block<br /><span class="underline-accent">that needs you most.</span></h2></div><div class="mode-switch" role="group" aria-label="Choose action view"><button class="mode-button active" data-mode="resident" type="button">Resident view</button><button class="mode-button" data-mode="organizer" type="button">Organizer view</button></div></div>
+        <div class="action-grid">
+          <article class="action-list-card"><div class="card-topline"><span class="mono tiny" id="actionEyebrow">FOR YOU / NEXT 3 HOURS</span><span class="progress-text"><span id="doneCount">1</span>/3 ready</span></div><div id="actionList" class="action-list"></div><button class="secondary-button" id="addActionButton" type="button">+ Add a plan item</button></article>
+          <aside class="impact-card"><div class="impact-orbit" aria-hidden="true"><span class="orbit-dot"></span><span class="orbit-dot two"></span><span class="orbit-dot three"></span><div><strong id="impactValue">18%</strong><span>estimated<br />risk reduction</span></div></div><span class="mono tiny">IF THIS PLAN SHIPS</span><h3 id="impactTitle">One cooler block<br />can protect 240 people.</h3><p id="impactBody">A coordinated check-in route plus two shade stops gives residents a reason to leave the hottest pavement.</p><div class="impact-foot"><span class="verified-mark">✓</span><span>assumption-led estimate<br /><b>show your work, build trust</b></span></div></aside>
+        </div>
+      </section>
+
+      <section class="how-section section-wrap" id="how-it-works">
+        <div class="section-kicker">03 / EXPLAIN THE SIGNAL</div><div class="how-grid"><div><h2>A number is only useful<br />when people can <em>act on it.</em></h2><p class="body-copy">HeatHalo keeps the model legible. It combines four signals, shows the trade-offs, and gives the community a path from “we should do something” to “here is who goes where.”</p><a class="text-link" href="#architecture">See the production path <span>→</span></a></div><div class="signal-steps"><div class="signal-step"><span class="step-number">01</span><div><strong>Exposure</strong><p>Air temperature, heat index, and surface heat.</p></div><span class="step-value">40%</span></div><div class="signal-step"><span class="step-number">02</span><div><strong>Canopy + shade</strong><p>Tree cover and nearby cooling infrastructure.</p></div><span class="step-value">25%</span></div><div class="signal-step"><span class="step-number">03</span><div><strong>Vulnerability</strong><p>Age, housing, mobility, and access proxies.</p></div><span class="step-value">25%</span></div><div class="signal-step"><span class="step-number">04</span><div><strong>Distance to relief</strong><p>Time to a cooling center or shaded route.</p></div><span class="step-value">10%</span></div></div></div>
+        <div class="responsible-note"><span class="note-pin">BOUNDARIES MATTER</span><p>These are planning signals, not labels for people. Community organizers can challenge the data, add local knowledge, and decide what action is appropriate.</p><span class="mono tiny">DEMO DATA / LAST REVIEWED AUG 2026</span></div>
+      </section>
+
+      <section class="impact-section section-wrap"><div class="impact-header"><div><div class="section-kicker">04 / MAKE IMPACT COUNTABLE</div><h2>Small actions.<br /><span class="underline-accent">Visible progress.</span></h2></div><p class="body-copy">The demo keeps an honest ledger of what a neighborhood can move this week—without pretending that a dashboard solves climate risk alone.</p></div><div class="metric-grid"><div class="metric"><span class="mono tiny">PEOPLE IN ROUTE</span><strong>240</strong><span>neighbors prioritized</span></div><div class="metric"><span class="mono tiny">BLOCKS SUPPORTED</span><strong>04</strong><span>with local context</span></div><div class="metric"><span class="mono tiny">ACTIONS READY</span><strong id="metricActions">06</strong><span>for today’s heat</span></div><div class="metric coral-metric"><span class="mono tiny">RISK SHIFT</span><strong>−18%</strong><span>if the plan ships</span></div></div></section>
+
+      <section class="architecture-section section-wrap" id="architecture"><div class="section-kicker">05 / FROM DEMO TO AWS</div><div class="architecture-heading"><h2>Ship the signal.<br /><em>Keep the humans.</em></h2><p class="body-copy">HeatHalo is designed to grow from a curated prototype into a resilient community service without hiding the decisions inside a black box.</p></div><div class="architecture-flow"><div class="arch-node"><span class="arch-icon">⌁</span><strong>Ingest</strong><small>weather + canopy<br />community reports</small></div><span class="flow-arrow">→</span><div class="arch-node highlight"><span class="arch-icon">◌</span><strong>Understand</strong><small>geospatial risk<br />explainable scoring</small></div><span class="flow-arrow">→</span><div class="arch-node"><span class="arch-icon">✦</span><strong>Recommend</strong><small>AI-assisted actions<br />human review</small></div><span class="flow-arrow">→</span><div class="arch-node"><span class="arch-icon">↗</span><strong>Coordinate</strong><small>resident plans<br />impact snapshots</small></div></div><div class="aws-strip"><span class="aws-badge">AWS PATH</span><span>Amazon S3 / AWS Lambda / Amazon Location / Amazon Bedrock / Amazon DynamoDB / Amazon CloudWatch</span><span class="mono tiny">agent-assisted build + human oversight</span></div></section>
+
+      <section class="final-cta section-wrap"><div class="final-cta-inner"><div class="brand-mark large" aria-hidden="true"><span></span></div><div><div class="section-kicker">A TOOL FOR THE NEXT HOT DAY</div><h2>Make the next action<br /><em>easier to find.</em></h2><p>HeatHalo is a community-first starting point for neighborhoods that refuse to leave heat response to chance.</p></div><a class="primary-button" href="#dashboard">Run the signal again <span>↗</span></a></div></section>
+    </main>
+    <footer class="footer section-wrap"><span class="brand-name">Heat<span>Halo</span></span><span class="mono tiny">A ZERO TO SHIPPED DEMO / SOCIAL GOOD · CLIMATE RESILIENCE</span><span class="mono tiny">BUILT WITH AN AI CODING AGENT</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
